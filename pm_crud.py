@@ -86,7 +86,7 @@ def create_book():
 
 
 # Update
-@app.route("/api/books/book", methods=["PUT"])
+@app.route("/api/books/<int:book_id>", methods=["PUT"])
 def update_book(book_id):
     book = find_book(book_id)
     if book is None:
@@ -111,7 +111,10 @@ def update_book(book_id):
     book["author"] = data.get("author", book["author"])
     book["year"] = data.get("year", book["year"])
 
-    return jsonify({"success": True, "data": book}), HTTPStatus.OK
+    return jsonify({"success": True,
+                     "data": book}),HTTPStatus.OK
+
+#Delete
 
 
 if __name__ == "__main__":
