@@ -1,19 +1,13 @@
 from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
 from http import HTTPStatus
 
 app = Flask(__name__)
 
-#sample data
-books = [
-    {"id": 1,
-     "title": "The Great Gatsby",
-     "author": "F. Scott Fitzgerald",
-      "year": 1925},
-    {"id": 2,
-      "title": "1984",
-        "author": "George Orwell", 
-        "year": 1949},
-]
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:your_password@localhost/book_db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 def find_book(book_id):
     for book in books:
